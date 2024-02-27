@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册界面</title>
+    <style>
+        html*{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        html{
+            font-size: 10px;
+        }
+        html::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index:-1;
+            background: linear-gradient(120deg,rgb(97, 97, 236),pink) no-repeat;
+        }
+        ::selection{
+            color:white;
+        }
+        .box{
+            display: flex;
+            overflow: hidden;
+            width: 90rem;
+            height: 55rem;
+            background-color: azure;
+            border-radius: 1.5rem;
+            margin: 10% auto;
+        }
+        .box .left{
+            position: relative;
+            width:35%;
+            height:100%;
+            background-size:cover;
+            opacity: 80%;
+            border-style:none;
+        }
+        .box .left::before{
+            position: absolute;
+            width: 100%;
+            height:100%;
+        }
+        .box .right{
+            width: 65%;
+            align-items: center;
+        }
+        .box .right h5{
+            font-size:4rem;
+            height:0px;
+            margin-top: 1rem;
+            text-align: center;
+            color:#e0c3fc;
+        }
+        .box .right form{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .dl{
+            outline: none;
+            width: 75%;
+            height: 5rem;
+            font-size:10px;
+            margin:2.5rem;
+            border:none;
+            cursor:text;
+        }
+        .tj{
+            width: 60%;
+            height: 4rem;
+        }
+        .fn{
+            display: flex;
+            width: 70%;
+            text-align : center;
+        }
+        .fn div{
+            width: 70%;
+        }
+        .fn a{
+            display:block;
+            margin: 0 auto;
+            width: 50%;
+            margin-top:5rem;
+            padding: 1rem 2rem;
+        }
+        .return{
+            font-size:2rem;
+            margin-top: 0rem;
+            text-align: center;
+            color:#e0c3fc;
+            background: linear-gradient(120deg,rgb(97, 97, 236),pink) no-repeat;
+            border-radius: 10%;
+        }
+    </style> 
+</head>
+<body>
+    <script>
+        function yanz(){
+            var obj=document.getElementById('password');
+            var psw=obj.value;
+            var len=psw.length;
+            var charnum=0;
+            var obj2=document.getElementById('newpassword');
+            if(len>=8){
+                for(var i=0;i<psw.length;i++){
+                    var ascsum=psw.substr(i,1).charCodeAt();
+                    if((ascsum>=65&&ascsum<=90)||(ascsum>=97&&ascsum<=122)){
+                        charnum+=1
+                    }
+                }
+                if(charnum==0){
+                    alert("密码中必须含有字母")
+                }
+            }
+            else{
+                alert("密码长度不能小于8")
+            }
+            var len2=obj2.value.length;
+            if(len2==len){
+              for(var j=0;j<psw.length;j++){
+                var asc=psw.substr(j,1).charCodeAt();
+                var abc=obj2.value.substr(j,i).charCodeAt();
+                if(asc!=abc){
+                    alert('两次输入密码不一致')
+                    break;
+                }
+              }
+            }
+            else{
+                alert("两次输入密码长度必须一致")
+            }
+        }
+        
+    </script>
+    <div class="box">
+        <img class="left" id="tp" src="left.png" onclick="changeImage()">
+        <div class="right">
+            <a href="Untitled-1.html" class="return">返回</a>
+            <h5>注册</h5>
+            <form action="">
+            <input class="dl" type="word" placeholder="username" > 
+            <input class="dl" id="password"  type="password" placeholder="password">
+            <input class="dl" id="newpassword"  type="password" placeholder="确认密码">
+            <input class="tj" type="submit" value="sign in" onclick="yanz()">
+        </form>
+    </div>
+</body>
+</html>
