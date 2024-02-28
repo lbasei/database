@@ -1,0 +1,132 @@
+# templates模板语法
+
+修改blog下的views.py
+
+def tpl(request):
+    name = "poker"
+    return render(request, "tpl.html", {"name":name})
+
+修改blog/templates下的tpl.html
+
+<body>
+
+    <h1>templates模板语法</h1>
+
+​    <li>姓名: {{ name }}</li>
+</body>
+
+列表
+
+def tpl(request):
+    name = "poker"
+    roles_list = ['服务员1', '服务员2', '服务员3']
+    
+
+    return render(request, "tpl.html", {"name":name, "roles_list":roles_list})
+
+<body>
+
+ <h1>templates模板语法</h1><body>
+
+    <h1>templates模板语法</h1>
+    <li>姓名: {{ name }}</li>
+    <li>服务员:{{ roles_list }}</li>
+    <li>服务员:{{ roles_list.0 }}</li>
+    <li>服务员:{{ roles_list.1 }}</li>
+    <li>服务员:{{ roles_list.2 }}</li>
+
+</body>
+
+循环列表
+
+修改blog/templates下的tpl.html
+
+<div>
+    列表循环:
+    {% for item in roles_list %}
+        <span>{{ item }}</span>
+    {% endfor %}
+</div>
+
+
+字典
+修改blog下的views.py
+
+def tpl(request):
+
+    name = "poker"
+    roles_list = ['服务员1', '服务员2', '服务员3']
+    user_info = {"name": "张三", "age": 25, "sex": "男"}
+    
+    return render(request, "tpl.html", {"name": name, "roles_list": roles_list, "user_info":user_info})
+
+循环字典
+
+获取值
+
+
+    {% for v in user_info.values %}
+        <li>{{ v }}</li>
+    {% endfor %}
+
+获取键
+
+ {% for k in user_info.keys %}           
+
+ <li>{{ k }}</li>        
+
+{% endfor %}
+
+获取键和值（同时）
+
+{% for k,v in user_info.items %}        
+
+<li>{{ k }} = {{ v }}</li>    
+
+{% endfor %}
+
+列表套字典
+
+
+    {% for item in data_list %}
+        <div>{{ item.name }} {{ item.age }} {{ item.sex }}</div>
+    {% endfor %}
+
+# 请求和响应
+
+**重定向:** 浏览器向某个网站发送请求,网站返回给浏览器一个新的URL,浏览器去访问这个新的URL地址
+
+## 代码示例
+
+### 导入 redirect 包
+
+from django.shortcuts import render, redirect
+...
+
+### 增加新函数
+
+def something(request):
+
+    # request 是一个对象,封装了用户发送过来的所有请求相关数据
+
+```html
+# 1.[请求]获取请求的方式
+print("用户请求的方式: " + request.method)
+
+# 2.[请求]在URL上传递值, 例如: http://123.249.26.154:5900/something/?n1=1&n2=2
+print(request.GET)
+
+# 3.[请求]在请求体中提交数据,目前是空值
+print(request.POST)
+
+# 4.[响应]HttpResponse("返回内容"), 内容字符串内容返回给请求者
+# return HttpResponse("返回内容")
+
+# 5.[响应]读取HTML的内容 + 渲染(替换) => 字符串,返回给用户浏览器
+# 需要在 blog/templates 下新建`something.html`
+#return render(request, 'something.html', {"title": "hello"})
+
+# 6.[响应] 让浏览器重定向到其他的页面 
+return redirect("http://www.baidu.com")
+```
+
